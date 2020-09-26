@@ -43,15 +43,18 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="El correo es requerido")]
             [EmailAddress]
+            [Display(Name = "Correo")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage ="La contraseña es requerida")]
             [DataType(DataType.Password)]
+            [Display(Name = "Contraseña")]
+            
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "¿Recordar cuenta?")]
             public bool RememberMe { get; set; }
         }
 
@@ -92,7 +95,7 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Bloqueado.");
                     return RedirectToPage("./Lockout");
                 }
                 else
