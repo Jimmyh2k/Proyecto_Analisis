@@ -52,7 +52,7 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required(ErrorMessage = "La contraseña es requerida")]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "La {0} debe ser al menos {2} y máximo de {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]
             public string Password { get; set; }
