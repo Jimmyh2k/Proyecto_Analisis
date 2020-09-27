@@ -3,50 +3,50 @@
 
 @{
     ViewData["Title"] = "Iniciar Sesión";
+    Layout = "~/Areas/Identity/Pages/_AutenticacionLayout.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+<center>
+    <div class="card border-dark mb-5" style="max-width: 25rem;">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <section>
+                    <div class="login-form-icon">
+                        <i class="fas fa-user-circle fa-9x text-secondary"></i>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">¿Olvidó la contraseña?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">¿Registrarse como usuario nuevo?</a>
-                    </p>
-                </div>
-            </form>
-        </section>
+                    <form id="account" method="post">
+                        <img src="~/images/usuario.png" width="150" height="150"/>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Clave"></label>
+                            <input asp-for="Input.Clave" class="form-control" />
+                            <span asp-validation-for="Input.Clave" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.Recordarme">
+                                    <input asp-for="Input.Recordarme" />
+                                    @Html.DisplayNameFor(m => m.Input.Recordarme)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-primary btn-sm">Iniciar sesión</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
     </div>
-    
-</div>
+</center>
+
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

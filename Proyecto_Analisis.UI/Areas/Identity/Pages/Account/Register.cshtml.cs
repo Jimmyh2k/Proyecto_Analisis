@@ -46,6 +46,11 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required(ErrorMessage = "El nombre es requerido")]
+            [DataType(DataType.Text)]
+            [Display(Name = "Nombre")]
+            public string Name { get; set; }
+
             [Required(ErrorMessage = "El correo es requerido")]
             [EmailAddress]
             [Display(Name = "Correo")]
