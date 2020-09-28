@@ -20,7 +20,7 @@ namespace Proyecto_Analisis.UI.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
-                services.AddDefaultIdentity<UsuariosDeProgramaDeFacturacion>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<UsuariosDeProgramaDeFacturacion>(options => options.SignIn.RequireConfirmedAccount = false)
                     .AddEntityFrameworkStores<AuthDbContext>();
             });
         }

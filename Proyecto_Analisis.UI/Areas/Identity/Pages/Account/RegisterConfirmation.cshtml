@@ -10,20 +10,20 @@
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
-<p>
-    El registro de su cuenta ha sido exitoso. Hemos enviado un correo a su dirección.
-</p>
-<br />
-<p>
-    Puede redirigirse a <a asp-area="" asp-controller="Home" asp-action="Index">Home</a> para continuar usando el programa.
-</p>
+        <p>
+            El registro de su cuenta ha sido exitoso. Hemos enviado un correo a su dirección.
+        </p>
+        <br />
+        <p>
+            Puede redirigirse a <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a> para continuar usando el programa.
+        </p>
 
     }
     else
     {
-<p>
-    Por favor revise su correo electrónico para confirmar su cuenta.
+        <p>
+            Por favor revise su correo electrónico para confirmar su cuenta.
 
-</p>
+        </p>
     }
 }

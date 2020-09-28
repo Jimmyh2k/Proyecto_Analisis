@@ -13,10 +13,10 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<UsuariosDeProgramaDeFacturacion> _userManager;
+        private readonly UserManager<Proyecto_AnalisisUIUser> _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<UsuariosDeProgramaDeFacturacion> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<Proyecto_AnalisisUIUser> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;
