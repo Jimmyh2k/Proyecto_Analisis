@@ -13,6 +13,8 @@ namespace Proyecto_Analisis.UI.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
+        
+        
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
@@ -20,9 +22,11 @@ namespace Proyecto_Analisis.UI.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
 
-                services.AddDefaultIdentity<UsuariosDeProgramaDeFacturacion>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<AuthDbContext>();
+                services.AddDefaultIdentity<UsuariosDeProgramaDeFacturacion>(options => options.SignIn.RequireConfirmedAccount = false).
+                AddRoles<IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
             });
         }
+        
+
     }
 }

@@ -100,7 +100,7 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Intento de iniciar sesión fallido.");
                     return Page();
                 }
             }

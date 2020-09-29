@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Proyecto_Analisis.UI.Areas.Identity.Data;
 
@@ -24,18 +25,22 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
         private readonly UserManager<UsuariosDeProgramaDeFacturacion> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<UsuariosDeProgramaDeFacturacion> userManager,
             SignInManager<UsuariosDeProgramaDeFacturacion> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
+            _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
         }
+        
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -66,6 +71,28 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
             [Display(Name = "Confirme contraseña")]
             [Compare("Password", ErrorMessage = "La contraseña y la confirmación de la contraseña no coincide.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "¿Eres administrador?")]
+            public bool Administrador { get; set; }
+
+            [Display(Name = "¿Eres agente de ventas?")]
+            public bool AgenteDeVentas { get; set; }
+        }
+
+        public async Task <IActionResult> CrearRoles() 
+        {
+            var roleExiste = await _roleManager.RoleExistsAsync("Administrador");
+            if (!roleExiste) 
+            {
+                var result = await _roleManager.CreateAsync(new IdentityRole("Administrador"));
+            }
+            var roleExiste2 = await _roleManager.RoleExistsAsync("Agente de ventas");
+            if (!roleExiste)
+            {
+                var result = await _roleManager.CreateAsync(new IdentityRole("Agente de ventas"));
+            }
+            return Page();
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -82,8 +109,14 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
             {
                 var user = new UsuariosDeProgramaDeFacturacion { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                
                 if (result.Succeeded)
                 {
+                 
+
+                    if (Input.Administrador == true) { _userManager.AddToRoleAsync(user, "Administrador").Wait(); }
+                    if (Input.AgenteDeVentas == true) { _userManager.AddToRoleAsync(user, "Agente de ventas").Wait(); }
                     _logger.LogInformation("Usuario creó una nueva cuenta con contraseña.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -104,6 +137,8 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        
+                        
                         return LocalRedirect(returnUrl);
                     }
                 }
@@ -113,8 +148,12 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+
+            
             return Page();
         }
+
+
+        
     }
 }
