@@ -1,10 +1,22 @@
 ﻿@page
 @model LockoutModel
 @{
-    ViewData["Title"] = "Locked out";
+    ViewData["Title"] = "Cuenta bloqueada temporalmente";
 }
 
 <header>
+    <br />
     <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">Esta cuenta ha sido bloqueada, intentelo mas tarde.</p>
+    <hr />
+    <p class="text-danger">
+        Su cuenta ha sido bloqueada temporlamente
+        debido a que ha execedido el máximo de intentos para iniciar sesión.
+    </p>
+    <p class="text-danger">
+        Por favor, intentelo dentro de tres minutos.
+    </p>
+    <br />
+    <center>
+        <img src="~/images/bloqueado.png" width="200" height="200"/>
+    </center>
 </header>
