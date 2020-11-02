@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Proyecto_Analisis.BL\Proyecto_Analisis.BL.csproj" />
+    <ProjectReference Include="..\Proyecto_Analisis.Model\Proyecto_Analisis.Model.csproj" />
+  </ItemGroup>
+
 </Project>
