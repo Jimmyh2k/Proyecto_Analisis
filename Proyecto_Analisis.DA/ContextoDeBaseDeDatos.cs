@@ -3,7 +3,7 @@ using Proyecto_Analisis.Model;
 
 namespace Proyecto_Analisis.DA
 {
-    class ContextoDeBaseDeDatos : DbContext
+    public class ContextoDeBaseDeDatos : DbContext
     {
 
         public ContextoDeBaseDeDatos(DbContextOptions<ContextoDeBaseDeDatos> opciones) : base(opciones)
