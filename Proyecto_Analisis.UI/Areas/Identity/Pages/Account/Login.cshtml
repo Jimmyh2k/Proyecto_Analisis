@@ -3,47 +3,41 @@
 
 @{
     ViewData["Title"] = "Iniciar Sesión";
-    Layout = "~/Areas/Identity/Pages/_AutenticacionLayout.cshtml";
+    <link href="~/css/LoginStyle.css" rel="stylesheet" />
 }
 
-<center>
-    <div class="card border-dark mb-5" style="max-width: 25rem;">
-        <div class="row">
-            <div class="col-md-10 offset-md-1">
-                <section>
-                    <div class="login-form-icon">
-                        <i class="fas fa-user-circle fa-9x text-secondary"></i>
-                    </div>
-                    <form id="account" method="post">
-                        <img src="~/images/usuario.png" width="150" height="150"/>
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="Input.Email"></label>
-                            <input asp-for="Input.Email" class="form-control" />
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Clave"></label>
-                            <input asp-for="Input.Clave" class="form-control" />
-                            <span asp-validation-for="Input.Clave" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label asp-for="Input.Recordarme">
-                                    <input asp-for="Input.Recordarme" />
-                                    @Html.DisplayNameFor(m => m.Input.Recordarme)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-outline-primary btn-sm">Iniciar sesión</button>
-                        </div>
-                    </form>
-                </section>
+
+<div class="contenedor">
+    <div>
+        <form id="account" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <h2 class="titulo">Inicio de sesión</h2>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="Input.Clave"></label>
+                <input asp-for="Input.Clave" class="form-control" />
+                <span asp-validation-for="Input.Clave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="Input.Recordarme">
+                        <input asp-for="Input.Recordarme" />
+                        @Html.DisplayNameFor(m => m.Input.Recordarme)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary btn-sm">Iniciar sesión</button>
+            </div>
+        </form>
     </div>
-</center>
+</div>
+
+
 
 
 
