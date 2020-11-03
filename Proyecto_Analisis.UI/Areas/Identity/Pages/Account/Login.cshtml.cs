@@ -20,12 +20,15 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
     {
         private readonly UserManager<UsuariosDeProgramaDeFacturacion> _userManager;
         private readonly SignInManager<UsuariosDeProgramaDeFacturacion> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<UsuariosDeProgramaDeFacturacion> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<UsuariosDeProgramaDeFacturacion> userManager)
+            UserManager<UsuariosDeProgramaDeFacturacion> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
+            _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -41,6 +44,21 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
+        public async Task<IActionResult> CrearRoles()
+        {
+            var roleExiste = await _roleManager.RoleExistsAsync("Administrador");
+            if (!roleExiste)
+            {
+                var result = await _roleManager.CreateAsync(new IdentityRole("Administrador"));
+            }
+            var roleExiste2 = await _roleManager.RoleExistsAsync("Agente de ventas");
+            if (!roleExiste)
+            {
+                var result = await _roleManager.CreateAsync(new IdentityRole("Agente de ventas"));
+            }
+            return Page();
+
+        }
         public class InputModel
         {
             [Required(ErrorMessage ="El correo es requerido")]
@@ -60,6 +78,14 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            await CrearRoles();
+            var user = new UsuariosDeProgramaDeFacturacion { UserName = "administrativo@facturacion.com", Email = "administrativo@facturacion.com" };
+            var resultado = await _userManager.CreateAsync(user, "Bienvenido1.");
+            if (resultado.Succeeded)
+            {
+                _userManager.AddToRoleAsync(user, "Administrador").Wait();
+            }
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -77,10 +103,13 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
             returnUrl = returnUrl ?? Url.Content("~/");
 
             if (ModelState.IsValid)
             {
+
+               
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Clave, Input.Recordarme, lockoutOnFailure: true);

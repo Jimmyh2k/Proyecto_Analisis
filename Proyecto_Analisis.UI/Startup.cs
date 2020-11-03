@@ -19,6 +19,7 @@ namespace Proyecto_Analisis.UI
     {
         public Startup(IConfiguration configuration)
         {
+           
             Configuration = configuration;
         }
 
@@ -36,6 +37,7 @@ Options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+          
             services.Configure<IdentityOptions>(options =>
             {
                 // Default Lockout settings.
@@ -46,7 +48,7 @@ Options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -72,7 +74,14 @@ Options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
             });
+
+            
+
+
         }
+
+      
     }
 }
