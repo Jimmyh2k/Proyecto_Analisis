@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Proyecto_Analisis.Model
 {
-    public class CorreoElectronico
+    public class correoElectronico
     {
         public int ID { get; set; }
-        public String correoElectronico { get; set; }
+        public String CorreoElectronico { get; set; }
 
     }
 }

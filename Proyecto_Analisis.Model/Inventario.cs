@@ -8,7 +8,7 @@ namespace Proyecto_Analisis.Model
     {
         public int ID_Inventario { get; set; }
 
-        public string ID_Producto { get; set; }
+        public int ID_Producto { get; set; }
 
         public int Cantidad { get; set; }
     }

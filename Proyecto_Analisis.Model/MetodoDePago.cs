@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Proyecto_Analisis.Model
 {
-    public class MetodoDePago
+    public class metodoDePago
     {
         public int Codigo { get; set; }
 
-        public string metodoDePago { get; set; }
+        public string MetodoDePago { get; set; }
 
     }
 }
