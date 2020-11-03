@@ -61,7 +61,7 @@ namespace Proyecto_Analisis.BL
 
         public void EditarProducto(Producto producto)
         {
-            Producto productoParaActualizar = ObtenerProductoPorId(producto.ID_Producto);
+            Producto productoParaActualizar = ElContextoDeBaseDeDatos.Producto.Find(producto.ID_Producto);
             productoParaActualizar.Nombre = producto.Nombre;
             productoParaActualizar.Detalle = producto.Detalle;
             productoParaActualizar.PrecioUnitario = producto.PrecioUnitario;
@@ -90,6 +90,11 @@ namespace Proyecto_Analisis.BL
             Lalista = ElContextoDeBaseDeDatos.Persona.ToList();
             return Lalista;
         }
-        
+
+        public void EliminarProducto(Producto producto)
+        {
+            ElContextoDeBaseDeDatos.Producto.Remove(producto);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
     }
 }

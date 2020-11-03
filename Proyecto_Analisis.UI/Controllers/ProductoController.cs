@@ -69,33 +69,31 @@ namespace Proyecto_Analisis.UI.Controllers
         // GET: ProductoController/Edit/5
         public ActionResult Edit(int id)
         {
-            Producto producto;
+            ViewBag.id = id;
 
-            producto = Repositorio.ObtenerProductoPorId(id);
+            if (ModelState.IsValid)
+            {
+                Producto producto;
+                producto = Repositorio.ObtenerProductoPorId(id);
+                return View(producto);
+            }
+            else
+            {
+                return View();
+            }
 
-            return View(producto);
         }
 
         // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Producto producto)
+        public ActionResult Edit(Producto producto, int id)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    Repositorio.EditarProducto(producto);
-
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    return View();
-                }
-
-
-
+                producto.ID_Producto = id;
+                Repositorio.EditarProducto(producto);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -106,16 +104,21 @@ namespace Proyecto_Analisis.UI.Controllers
         // GET: ProductoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Producto producto;
+            producto = Repositorio.ObtenerProductoPorId(id);
+
+            return View(producto);
         }
 
         // POST: ProductoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Producto producto)
         {
             try
             {
+                Repositorio.EliminarProducto(producto);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -18,6 +18,7 @@ namespace Proyecto_Analisis.BL
         public void actualizarCliente(Persona persona);
 
         public void EliminarCliente(Persona persona);
+        public void EliminarProducto(Producto producto);
 
         public Persona ObtenerPorId(int id);
 
