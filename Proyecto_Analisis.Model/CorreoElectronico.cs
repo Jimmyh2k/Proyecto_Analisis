@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Proyecto_Analisis.Model
 {
-    public class correoElectronico
+    public class CorreoElectronico
     {
         [Key]
         public int ID { get; set; }
-        public String CorreoElectronico { get; set; }
+        public String correoElectronico { get; set; }
 
     }
 }
