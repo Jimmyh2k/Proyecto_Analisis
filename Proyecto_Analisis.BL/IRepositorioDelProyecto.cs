@@ -13,6 +13,8 @@ namespace Proyecto_Analisis.BL
 
         public void AgregarProducto(Producto producto);
 
+        public void AgregarCliente(Persona persona);
+
         public void EditarProducto(Producto producto);
         Producto ObtenerProductoPorId(int id);
     }

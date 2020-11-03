@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PrimerNombre)
             </th>
             <th>
@@ -31,16 +28,16 @@
                 @Html.DisplayNameFor(model => model.CorreoElectronico)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoPais)
+                @Html.DisplayNameFor(model => model.Pais)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ID_Provincia)
+                @Html.DisplayNameFor(model => model.Provincia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ID_Canton)
+                @Html.DisplayNameFor(model => model.Canton)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ID_Distrito)
+                @Html.DisplayNameFor(model => model.Distrito)
             </th>
             <th></th>
         </tr>
@@ -48,9 +45,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PrimerNombre)
             </td>
@@ -67,16 +61,16 @@
                 @Html.DisplayFor(modelItem => item.CorreoElectronico)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodigoPais)
+                @Html.DisplayFor(modelItem => item.Pais)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ID_Provincia)
+                @Html.DisplayFor(modelItem => item.Provincia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ID_Canton)
+                @Html.DisplayFor(modelItem => item.Canton)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ID_Distrito)
+                @Html.DisplayFor(modelItem => item.Distrito)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

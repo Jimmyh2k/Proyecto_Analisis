@@ -17,6 +17,12 @@ namespace Proyecto_Analisis.BL
 
         }
 
+        public void AgregarCliente(Persona persona)
+        {
+            ElContextoDeBaseDeDatos.Persona.Add(persona);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
         public void AgregarProducto(Producto producto)
         {
             ElContextoDeBaseDeDatos.Producto.Add(producto);

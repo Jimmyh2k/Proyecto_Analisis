@@ -35,20 +35,31 @@ namespace Proyecto_Analisis.UI.Controllers
             return View();
         }
 
-        // GET: ClientesController/Create
+        // GET: ProductoController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ClientesController/Create
+        // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Persona persona)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    Repositorio.AgregarCliente(persona);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
+
+
             }
             catch
             {
