@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Proyecto_Analisis.Model
 {
     public class Persona
     {
+        [Key]
         public int ID { get; set; }
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
