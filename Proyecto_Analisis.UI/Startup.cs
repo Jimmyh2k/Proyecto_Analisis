@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Proyecto_Analisis.BL;
+using Proyecto_Analisis.DA;
 
 namespace Proyecto_Analisis.UI
 {
@@ -24,7 +27,13 @@ namespace Proyecto_Analisis.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddDbContext<ContextoDeBaseDeDatos>(Options =>
+Options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IRepositorioDelProyecto, RepositorioDelProyecto>();
+
+            services.AddControllersWithViews();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.Configure<IdentityOptions>(options =>

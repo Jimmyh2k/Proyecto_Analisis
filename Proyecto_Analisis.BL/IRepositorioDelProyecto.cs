@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Proyecto_Analisis.BL
 {
-    interface IRepositorioDelProyecto
+    public interface IRepositorioDelProyecto
     {
     }
 }

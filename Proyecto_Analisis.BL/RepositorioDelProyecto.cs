@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Proyecto_Analisis.BL
 {
-    class RepositorioDelProyecto : IRepositorioDelProyecto
+    public class RepositorioDelProyecto : IRepositorioDelProyecto
     {
 
         private ContextoDeBaseDeDatos ElContextoDeBaseDeDatos;
