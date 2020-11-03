@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Proyecto_Analisis.Model
 {
-    public class metodoDePago
+    public class MetodoDePago
     {
         [Key]
         public int Codigo { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Proyecto_Analisis.Model
 {
-    public class correoElectronico
+    public class CorreoElectronico
     {
         [Key]
         public int ID { get; set; }
