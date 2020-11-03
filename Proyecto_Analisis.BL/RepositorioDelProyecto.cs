@@ -17,6 +17,30 @@ namespace Proyecto_Analisis.BL
 
         }
 
+        public void AgregarProducto(Producto producto)
+        {
+            ElContextoDeBaseDeDatos.Producto.Add(producto);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public void EditarProducto(Producto producto)
+        {
+            Producto productoParaActualizar = ObtenerProductoPorId(producto.ID_Producto);
+            productoParaActualizar.Nombre = producto.Nombre;
+            productoParaActualizar.Detalle = producto.Detalle;
+            productoParaActualizar.PrecioUnitario = producto.PrecioUnitario;
+            productoParaActualizar.Cantidad = producto.Cantidad;
+            ElContextoDeBaseDeDatos.Producto.Update(productoParaActualizar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public Producto ObtenerProductoPorId(int id)
+        {
+            Producto producto;
+            producto = ElContextoDeBaseDeDatos.Producto.Find(id);
+            return producto;
+        }
+
         public List<Producto> ObtenerTodosLosArticulos()
         {
             List<Producto> Lalista;

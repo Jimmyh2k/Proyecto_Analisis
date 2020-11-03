@@ -11,5 +11,9 @@ namespace Proyecto_Analisis.BL
 
         public List<Producto> ObtenerTodosLosArticulos();
 
+        public void AgregarProducto(Producto producto);
+
+        public void EditarProducto(Producto producto);
+        Producto ObtenerProductoPorId(int id);
     }
 }

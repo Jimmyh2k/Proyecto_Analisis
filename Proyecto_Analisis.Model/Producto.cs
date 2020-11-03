@@ -12,6 +12,7 @@ namespace Proyecto_Analisis.Model
         public string Nombre { get; set; }
         public string Detalle { get; set; }
         public int PrecioUnitario { get; set; }
+        public int Cantidad { get; set; }
 
     }
 }

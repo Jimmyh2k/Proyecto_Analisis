@@ -43,11 +43,22 @@ namespace Proyecto_Analisis.UI.Controllers
         // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Producto producto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    Repositorio.AgregarProducto(producto);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
+
+
             }
             catch
             {
@@ -58,17 +69,33 @@ namespace Proyecto_Analisis.UI.Controllers
         // GET: ProductoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Producto producto;
+
+            producto = Repositorio.ObtenerProductoPorId(id);
+
+            return View(producto);
         }
 
         // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Producto producto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    Repositorio.EditarProducto(producto);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
+
+
+
             }
             catch
             {
