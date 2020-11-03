@@ -1,0 +1,31 @@
+﻿body {
+    background-image: url(../images/nosotros.jpg);
+    background-position: center;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.titulo {
+    color: white;
+    -webkit-text-stroke: 1px black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 50px;
+}
+
+label{
+    font-size: 20px;
+}
+
+.contenedor {
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-right: 160px;
+    margin-left: 160px;
+    padding-bottom: 80px;
+    align-items: center;
+    text-align: center;
+}
