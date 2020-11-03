@@ -24,7 +24,7 @@ namespace Proyecto_Analisis.BL
         }
 
 
-        public void actualizar(Persona persona)
+        public void actualizarCliente(Persona persona)
         {
             Persona PersonaPorActualizar;
             PersonaPorActualizar = ObtenerPorId(persona.ID);
@@ -47,6 +47,10 @@ namespace Proyecto_Analisis.BL
             Persona persona;
             persona = ElContextoDeBaseDeDatos.Persona.Find(id);
             return persona;
+        }
+        public void EliminarCliente(Persona persona) {
+            ElContextoDeBaseDeDatos.Persona.Remove(persona);
+              ElContextoDeBaseDeDatos.SaveChanges();
         }
 
         public void AgregarProducto(Producto producto)
@@ -86,5 +90,6 @@ namespace Proyecto_Analisis.BL
             Lalista = ElContextoDeBaseDeDatos.Persona.ToList();
             return Lalista;
         }
+        
     }
 }

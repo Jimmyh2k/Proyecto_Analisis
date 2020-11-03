@@ -83,7 +83,7 @@ namespace Proyecto_Analisis.UI.Controllers
         {
             try
             {
-                Repositorio.actualizar(persona);
+                Repositorio.actualizarCliente(persona);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -96,16 +96,21 @@ namespace Proyecto_Analisis.UI.Controllers
         // GET: ClientesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Persona persona;
+            persona = Repositorio.ObtenerPorId(id);
+
+            return View(persona);
         }
 
         // POST: ClientesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Persona persona)
         {
             try
             {
+                Repositorio.EliminarCliente(persona);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

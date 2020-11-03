@@ -15,7 +15,9 @@ namespace Proyecto_Analisis.BL
 
         public void AgregarCliente(Persona persona);
 
-        public void actualizar(Persona persona);
+        public void actualizarCliente(Persona persona);
+
+        public void EliminarCliente(Persona persona);
 
         public Persona ObtenerPorId(int id);
 
