@@ -6,7 +6,7 @@ namespace Proyecto_Analisis.Model
 {
     public class MetodoDePago
     {
-        public string Codigo { get; set; }
+        public int Codigo { get; set; }
 
         public string metodoDePago { get; set; }
 

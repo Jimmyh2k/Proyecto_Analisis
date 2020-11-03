@@ -6,7 +6,7 @@ namespace Proyecto_Analisis.Model
 {
     public class Inventario
     {
-        public string ID_Inventario { get; set; }
+        public int ID_Inventario { get; set; }
 
         public string ID_Producto { get; set; }
 

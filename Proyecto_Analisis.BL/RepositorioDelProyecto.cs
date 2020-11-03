@@ -1,7 +1,9 @@
 ﻿using Proyecto_Analisis.DA;
+using Proyecto_Analisis.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Proyecto_Analisis.BL
 {
@@ -15,5 +17,11 @@ namespace Proyecto_Analisis.BL
 
         }
 
+        public List<Persona> ObtenerTodosLosClientes()
+        {
+            List<Persona> Lalista;
+            Lalista = ElContextoDeBaseDeDatos.Persona.ToList();
+            return Lalista;
+        }
     }
 }

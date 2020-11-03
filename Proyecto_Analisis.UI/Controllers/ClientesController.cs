@@ -4,15 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Proyecto_Analisis.BL;
+using Proyecto_Analisis.Model;
 
 namespace Proyecto_Analisis.UI.Controllers
 {
     public class ClientesController : Controller
     {
+
+        private readonly IRepositorioDelProyecto Repositorio;
+
+        public ClientesController (IRepositorioDelProyecto repositorio)
+        {
+            Repositorio = repositorio;
+        }
+
         // GET: ClientesController
         public ActionResult Index()
         {
-            return View();
+            List<Persona> paqueteria;
+
+            paqueteria = Repositorio.ObtenerTodosLosClientes();
+
+            return View(paqueteria);
         }
 
         // GET: ClientesController/Details/5

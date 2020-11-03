@@ -12,10 +12,10 @@ namespace Proyecto_Analisis.Model
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public string CorreoElectronico { get; set; }
-        public string CodigoPais { get; set; }
-        public string ID_Provincia { get; set; }
-        public string ID_Canton { get; set; }
-        public string ID_Distrito { get; set; }
+        public int CodigoPais { get; set; }
+        public int ID_Provincia { get; set; }
+        public int ID_Canton { get; set; }
+        public int ID_Distrito { get; set; }
 
     }
 }
