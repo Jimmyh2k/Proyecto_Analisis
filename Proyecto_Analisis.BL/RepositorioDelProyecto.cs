@@ -23,6 +23,32 @@ namespace Proyecto_Analisis.BL
             ElContextoDeBaseDeDatos.SaveChanges();
         }
 
+
+        public void actualizar(Persona persona)
+        {
+            Persona PersonaPorActualizar;
+            PersonaPorActualizar = ObtenerPorId(persona.ID);
+
+            PersonaPorActualizar.PrimerNombre = persona.PrimerNombre;
+            PersonaPorActualizar.SegundoNombre = persona.SegundoNombre;
+            PersonaPorActualizar.PrimerApellido = persona.PrimerApellido;
+            PersonaPorActualizar.SegundoApellido = persona.SegundoApellido;
+            PersonaPorActualizar.CorreoElectronico = persona.CorreoElectronico;
+            PersonaPorActualizar.Pais = persona.Pais;
+            PersonaPorActualizar.Provincia = persona.Provincia;
+            PersonaPorActualizar.Canton = persona.Canton;
+            PersonaPorActualizar.Distrito = persona.Distrito;
+            ElContextoDeBaseDeDatos.Persona.Update(PersonaPorActualizar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public Persona ObtenerPorId(int id)
+        {
+            Persona persona;
+            persona = ElContextoDeBaseDeDatos.Persona.Find(id);
+            return persona;
+        }
+
         public void AgregarProducto(Producto producto)
         {
             ElContextoDeBaseDeDatos.Producto.Add(producto);
