@@ -79,7 +79,7 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             await CrearRoles();
-            var user = new UsuariosDeProgramaDeFacturacion { UserName = "administrativo@facturacion.com", Email = "lorenzogranadosv@gmail.com" };
+            var user = new UsuariosDeProgramaDeFacturacion { UserName = "administrativo@facturacion.com", Email = "administrativo@facturacion.com" };
             var resultado = await _userManager.CreateAsync(user, "Bienvenido1.");
             if (resultado.Succeeded)
             {
