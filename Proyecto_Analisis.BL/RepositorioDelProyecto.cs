@@ -17,6 +17,13 @@ namespace Proyecto_Analisis.BL
 
         }
 
+        public List<Producto> ObtenerTodosLosArticulos()
+        {
+            List<Producto> Lalista;
+            Lalista = ElContextoDeBaseDeDatos.Producto.ToList();
+            return Lalista;
+        }
+
         public List<Persona> ObtenerTodosLosClientes()
         {
             List<Persona> Lalista;

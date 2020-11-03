@@ -4,15 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Proyecto_Analisis.BL;
+using Proyecto_Analisis.Model;
 
 namespace Proyecto_Analisis.UI.Controllers
 {
     public class ProductoController : Controller
     {
+        private readonly IRepositorioDelProyecto Repositorio;
+
+        public ProductoController(IRepositorioDelProyecto repositorio)
+        {
+            Repositorio = repositorio;
+        }
+
         // GET: ProductoController
         public ActionResult Index()
         {
-            return View();
+            List<Producto> listaDeLibros;
+
+            listaDeLibros = Repositorio.ObtenerTodosLosArticulos();
+
+            return View(listaDeLibros);
         }
 
         // GET: ProductoController/Details/5

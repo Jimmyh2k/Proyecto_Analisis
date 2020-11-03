@@ -8,5 +8,8 @@ namespace Proyecto_Analisis.BL
     public interface IRepositorioDelProyecto
     {
         public List<Persona> ObtenerTodosLosClientes();
+
+        public List<Producto> ObtenerTodosLosArticulos();
+
     }
 }
