@@ -67,19 +67,24 @@ namespace Proyecto_Analisis.UI.Controllers
             }
         }
 
-        // GET: ClientesController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: PaquetesRecibidos/Edit/5
+        public ActionResult Edit(int Id)
         {
-            return View();
+            Persona persona;
+            persona = Repositorio.ObtenerPorId(Id);
+
+            return View(persona);
         }
 
-        // POST: ClientesController/Edit/5
+        // POST: Libros/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Persona persona)
         {
             try
             {
+                Repositorio.actualizar(persona);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
