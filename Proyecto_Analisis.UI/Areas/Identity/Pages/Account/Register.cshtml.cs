@@ -72,10 +72,10 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "La contraseña y la confirmación de la contraseña no coincide.")]
             public string ConfirmPassword { get; set; }
 
-            [Display(Name = "¿Eres administrador?")]
+            [Display(Name = "¿Asignar rol de administrador?")]
             public bool Administrador { get; set; }
 
-            [Display(Name = "¿Eres agente de ventas?")]
+            [Display(Name = "¿Asignar rol de agente de ventas?")]
             public bool AgenteDeVentas { get; set; }
         }
 
