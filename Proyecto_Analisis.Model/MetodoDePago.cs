@@ -10,7 +10,7 @@ namespace Proyecto_Analisis.Model
         [Key]
         public int Codigo { get; set; }
 
-        public string MetodoDePago { get; set; }
+        public string metodoDePago { get; set; }
 
     }
 }
