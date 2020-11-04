@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<Proyecto_Analisis.Model.Factura>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "FacturasFinalizadas";
 }
 
-<h1>Index</h1>
+<h1>Facturas finalizadas</h1>
 
-<p>
-    <a asp-action="FacturaNueva"  >Crear una factura nueva</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -18,7 +16,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.NombreComercial)
             </th>
-            
             <th>
                 @Html.DisplayNameFor(model => model.MontoTotal)
             </th>
@@ -34,13 +31,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NombreComercial)
             </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.MontoTotal)
             </td>
-            <td>
-                <a asp-action="ListarClientes" asp-route-ID_Factura="@item.CodigoFactura">Llenar factura</a> |               
-            </td>
+           
         </tr>
 }
     </tbody>

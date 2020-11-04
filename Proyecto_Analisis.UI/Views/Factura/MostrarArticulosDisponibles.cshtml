@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Proyecto_Analisis.Model.Producto>
+
+@{
+    ViewData["Title"] = "MostrarArticulosDisponibles";
+}
+
+<h1>MostrarArticulosDisponibles</h1>
+
+<p>
+    <a asp-action="Finalizar"  onclick="return confirm('¿Seguro que desea finalizar esta factura?')" asp-route-ID_Factura="@ViewBag.ID_Factura"  >Finalizar Factura</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                <a asp-action="AgregarALaFactura" onclick="return confirm('¿Seguro que desea agregar este producto a la factura?')" asp-route-ID_Factura="@ViewBag.ID_Factura"  asp-route-ID_Cliente="@ViewBag.ID_Cliente" asp-route-ID_Producto="@item.ID_Producto">Agregar a al factura</a> |
+                <a asp-action="Details" asp-route-id="@item.ID_Producto">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID_Producto">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -7,7 +7,7 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-      
+
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
         </li>
@@ -20,6 +20,15 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="Index">Inventario</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Factura" asp-action="Index">Crear factura</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Factura" asp-action="FacturasFinalizadas">Facturas finalizadas</a>
+        </li>
+
+
+
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Mensaje">Generar cierres</a>
         </li>
@@ -35,6 +44,6 @@
     }
     else
     {
-       
+
     }
 </ul>

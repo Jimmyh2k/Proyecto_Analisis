@@ -9,10 +9,23 @@ namespace Proyecto_Analisis.BL
     {
         public List<Persona> ObtenerTodosLosClientes();
 
+        
+        public List<Factura> ObtenerTodasLasFacturas();
+
+        public List<Factura> ObtenerFacturasVacias();
+
+        public List<Factura> ObtenerFacturasFinalizadas();
+
         public List<Producto> ObtenerTodosLosArticulos();
 
-        public void AgregarProducto(Producto producto);
+        public List<Producto> ObtenerArticulosDisponibles();
 
+        public void FinalizarFactura(int ID_Factura);
+
+        public void AgregarProducto(Producto producto);
+        public void AgregarDetalleDeFactura(DetalleFactura detalleFactura);
+
+        public void AgregarFactura(Factura factura);
         public void AgregarCliente(Persona persona);
 
         public void actualizarCliente(Persona persona);
@@ -23,6 +36,7 @@ namespace Proyecto_Analisis.BL
         public Persona ObtenerPorId(int id);
 
         public void EditarProducto(Producto producto);
+        public void DecrementarCantidadDeProducto(int ID_Producto);
         Producto ObtenerProductoPorId(int id);
     }
 }
