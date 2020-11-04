@@ -8,15 +8,16 @@ namespace Proyecto_Analisis.BL
     public interface IRepositorioDelProyecto
     {
         public List<Persona> ObtenerTodosLosClientes();
-
-        
+        public Persona ObtenerClienteDeFactura(int ID_Factura);
         public List<Factura> ObtenerTodasLasFacturas();
-
+        public Factura ObtenerFacturaPorID(int ID_Factura);
         public List<Factura> ObtenerFacturasVacias();
 
         public List<Factura> ObtenerFacturasFinalizadas();
 
         public List<Producto> ObtenerTodosLosArticulos();
+
+        public List<Producto> ObtenerProductosDeFactura(int ID_Factura);
 
         public List<Producto> ObtenerArticulosDisponibles();
 

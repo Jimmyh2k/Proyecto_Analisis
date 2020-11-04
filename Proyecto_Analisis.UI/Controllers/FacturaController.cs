@@ -129,6 +129,20 @@ namespace Proyecto_Analisis.UI.Controllers
             }));
         }
 
+        public ActionResult Detalles(int ID_Factura)
+        {
+            List<Producto> productos;
+            productos = Repositorio.ObtenerProductosDeFactura(ID_Factura);
+            Persona Cliente = Repositorio.ObtenerClienteDeFactura(ID_Factura);
+            Factura factura =Repositorio.ObtenerFacturaPorID(ID_Factura);
+            FacturaDetallada facturaDetallada = new FacturaDetallada();
+            facturaDetallada.FechaEmision = factura.FechaEmision;
+            facturaDetallada.NombreComercial = factura.NombreComercial;
+            facturaDetallada.ListaDeProductos = productos;
+            facturaDetallada.MontoTotal = factura.MontoTotal;
+            facturaDetallada.Cliente = Cliente;
+            return View(facturaDetallada);
+        }
 
     }
 }

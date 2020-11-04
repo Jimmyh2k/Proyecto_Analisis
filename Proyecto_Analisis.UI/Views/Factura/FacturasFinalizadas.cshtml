@@ -34,7 +34,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MontoTotal)
             </td>
-           
+            <td>
+                <a asp-action="Detalles" asp-route-ID_Factura="@item.CodigoFactura">Detalles</a> |
+            </td>
+
         </tr>
 }
     </tbody>

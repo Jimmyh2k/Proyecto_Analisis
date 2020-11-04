@@ -24,13 +24,13 @@ namespace Proyecto_Analisis.BL
         }
 
         public void FinalizarFactura(int ID_Factura) {
-            int montoTotal=0;
+            int montoTotal = 0;
             Factura facturaParaFinalizar = ElContextoDeBaseDeDatos.Factura.Find(ID_Factura);
             List<DetalleFactura> detallesDeFactura;
-            detallesDeFactura= ElContextoDeBaseDeDatos.DetalleFactura.ToList();
+            detallesDeFactura = ElContextoDeBaseDeDatos.DetalleFactura.ToList();
             foreach (var detalle in detallesDeFactura)
             {
-                if (detalle.CodigoFactura== facturaParaFinalizar.CodigoFactura) 
+                if (detalle.CodigoFactura == facturaParaFinalizar.CodigoFactura)
                 {
                     Producto producto = ObtenerProductoPorId(detalle.ID_Producto);
                     montoTotal += producto.PrecioUnitario;
@@ -68,6 +68,23 @@ namespace Proyecto_Analisis.BL
             persona = ElContextoDeBaseDeDatos.Persona.Find(id);
             return persona;
         }
+
+        public List<Producto> ObtenerProductosDeFactura(int ID_Factura)
+        {
+            List<Producto> productos = new List<Producto>();
+            List<DetalleFactura> detalles = ElContextoDeBaseDeDatos.DetalleFactura.ToList();
+            foreach (var detalle in detalles)
+            {
+                if (detalle.CodigoFactura == ID_Factura) {
+                    Producto productoRelacionado = ObtenerProductoPorId(detalle.ID_Producto);
+                    productos.Add(productoRelacionado);
+                }
+
+            }
+            return productos;
+
+        }
+
         public void EliminarCliente(Persona persona) {
             ElContextoDeBaseDeDatos.Persona.Remove(persona);
             ElContextoDeBaseDeDatos.SaveChanges();
@@ -79,10 +96,35 @@ namespace Proyecto_Analisis.BL
             ElContextoDeBaseDeDatos.SaveChanges();
         }
 
-        public void AgregarFactura(Factura factura){
-            
+        public void AgregarFactura(Factura factura) {
+
             ElContextoDeBaseDeDatos.Factura.Add(factura);
             ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public Factura ObtenerFacturaPorID(int ID_Factura) {
+            Factura factura;
+            factura = ElContextoDeBaseDeDatos.Factura.Find(ID_Factura);
+            return factura;
+
+        }
+
+        public Persona ObtenerClienteDeFactura(int ID_Factura) 
+        {
+            Persona persona = new Persona();
+            List<DetalleFactura> detalles = ElContextoDeBaseDeDatos.DetalleFactura.ToList();
+            foreach (var detalle in detalles)
+            {
+                if (detalle.CodigoFactura==ID_Factura) 
+                {
+                    persona = ElContextoDeBaseDeDatos.Persona.Find(detalle.ID_Persona);
+                    break;
+                }
+
+            }
+            return persona;
+
+
         }
 
         public List<Factura> ObtenerFacturasVacias() {

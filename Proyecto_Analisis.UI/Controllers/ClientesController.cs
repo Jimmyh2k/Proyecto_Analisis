@@ -30,10 +30,7 @@ namespace Proyecto_Analisis.UI.Controllers
         }
 
         // GET: ClientesController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: ProductoController/Create
         public ActionResult Create()
