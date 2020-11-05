@@ -44,8 +44,6 @@
             </td>
             <td>
                 <a asp-action="AgregarALaFactura" onclick="return confirm('¿Seguro que desea agregar este producto a la factura?')" asp-route-ID_Factura="@ViewBag.ID_Factura"  asp-route-ID_Cliente="@ViewBag.ID_Cliente" asp-route-ID_Producto="@item.ID_Producto">Agregar a al factura</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_Producto">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_Producto">Delete</a>
             </td>
         </tr>
 }
