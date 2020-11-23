@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_Analisis.Model", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_Analisis.BL", "Proyecto_Analisis.BL\Proyecto_Analisis.BL.csproj", "{0083D255-A3BB-489B-B2D8-EB12462CC872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_Analisis.BLTests4", "Proyecto_Analisis.BLTests4\Proyecto_Analisis.BLTests4.csproj", "{B64C1548-B9EB-4220-82A4-1307C6FBD688}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_Analisis.BLTests", "Proyecto_Analisis.BLTests4\Proyecto_Analisis.BLTests.csproj", "{B64C1548-B9EB-4220-82A4-1307C6FBD688}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

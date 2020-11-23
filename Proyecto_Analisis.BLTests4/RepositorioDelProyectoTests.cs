@@ -73,7 +73,7 @@ namespace Proyecto_Analisis.BL.Tests
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
             mockRepositorioDelProyecto.Setup(x => x.AgregarCliente(persona));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodosLosClientes()).Returns(new List<Persona>() { new Persona() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosClientes();
             Assert.IsNotNull(resultadoDelTest);
         }
@@ -96,7 +96,7 @@ namespace Proyecto_Analisis.BL.Tests
             mockRepositorioDelProyecto.Setup(x => x.AgregarCliente(persona));
             mockRepositorioDelProyecto.Setup(y => y.actualizarCliente(personaAcomparar));
             mockRepositorioDelProyecto.Setup(w => w.ObtenerPorId(persona.ID)).Returns(new Persona());
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
 
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerPorId(persona.ID);
 
@@ -112,7 +112,7 @@ namespace Proyecto_Analisis.BL.Tests
 
             mockRepositorioDelProyecto.Setup(x => x.AgregarCliente(persona));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerPorId(persona.ID)).Returns(new Persona());
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
 
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerPorId(persona.ID);
 
@@ -138,7 +138,7 @@ namespace Proyecto_Analisis.BL.Tests
             mockRepositorioDelProyecto.Setup(z => z.AgregarCliente(personaSegunda));
             mockRepositorioDelProyecto.Setup(x => x.EliminarCliente(persona));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodosLosClientes()).Returns(new List<Persona>() { new Persona() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosClientes();
             Assert.IsTrue(resultadoDelTest.Count() == 1);
             //Assert.IsNotNull(resultadoDelTest);
@@ -152,7 +152,7 @@ namespace Proyecto_Analisis.BL.Tests
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
             mockRepositorioDelProyecto.Setup(x => x.AgregarProducto(producto));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodosLosArticulos()).Returns(new List<Producto>() { new Producto() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosArticulos();
             Assert.IsNotNull(resultadoDelTest);
         }
@@ -165,7 +165,7 @@ namespace Proyecto_Analisis.BL.Tests
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
             mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodasLasFacturas()).Returns(new List<Factura>() { new Factura() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodasLasFacturas();
             Assert.IsNotNull(resultadoDelTest);
         }
@@ -179,7 +179,7 @@ namespace Proyecto_Analisis.BL.Tests
 
             mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerFacturaPorID(factura.CodigoFactura)).Returns(new Factura());
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
 
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerFacturaPorID(factura.CodigoFactura);
 
@@ -221,7 +221,7 @@ namespace Proyecto_Analisis.BL.Tests
             mockRepositorioDelProyecto.Setup(x => x.AgregarProducto(producto));
             mockRepositorioDelProyecto.Setup(y => y.EditarProducto(productoAcomparar));
             mockRepositorioDelProyecto.Setup(w => w.ObtenerProductoPorId(producto.ID_Producto)).Returns(new Producto());
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
 
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerProductoPorId(producto.ID_Producto);
 
@@ -254,7 +254,7 @@ namespace Proyecto_Analisis.BL.Tests
 
             mockRepositorioDelProyecto.Setup(x => x.AgregarProducto(producto));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerProductoPorId(producto.ID_Producto)).Returns(new Producto());
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
 
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerProductoPorId(producto.ID_Producto);
 
@@ -269,7 +269,7 @@ namespace Proyecto_Analisis.BL.Tests
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
             mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodasLasFacturas()).Returns(new List<Factura>() { new Factura() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodasLasFacturas();
             Assert.IsNotNull(resultadoDelTest);
         }
@@ -283,7 +283,7 @@ namespace Proyecto_Analisis.BL.Tests
 
             mockRepositorioDelProyecto.Setup(x => x.AgregarProducto(producto));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodosLosArticulos()).Returns(new List<Producto>() { new Producto() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosArticulos();
 
             Assert.IsNotNull(resultadoDelTest);
@@ -306,7 +306,7 @@ namespace Proyecto_Analisis.BL.Tests
 
             mockRepositorioDelProyecto.Setup(x => x.AgregarCliente(persona));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodosLosClientes()).Returns(new List<Persona>() { new Persona() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosClientes();
 
             Assert.IsNotNull(resultadoDelTest);
@@ -325,7 +325,7 @@ namespace Proyecto_Analisis.BL.Tests
             mockRepositorioDelProyecto.Setup(z => z.AgregarProducto(productoSegundo));
             mockRepositorioDelProyecto.Setup(x => x.EditarProducto(producto));
             mockRepositorioDelProyecto.Setup(y => y.ObtenerTodosLosArticulos()).Returns(new List<Producto>() { new Producto() });
-            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosArticulos();
             Assert.IsTrue(resultadoDelTest.Count() == 1);
 

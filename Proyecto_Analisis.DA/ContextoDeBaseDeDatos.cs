@@ -6,6 +6,11 @@ namespace Proyecto_Analisis.DA
     public class ContextoDeBaseDeDatos : DbContext
     {
 
+        public ContextoDeBaseDeDatos()
+        {
+
+        }
+
         public ContextoDeBaseDeDatos(DbContextOptions<ContextoDeBaseDeDatos> opciones) : base(opciones)
         {
         }

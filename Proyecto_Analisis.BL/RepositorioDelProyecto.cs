@@ -11,17 +11,11 @@ namespace Proyecto_Analisis.BL
     {
 
         private ContextoDeBaseDeDatos ElContextoDeBaseDeDatos;
-        private IRepositorioDelProyecto @object;
 
         public RepositorioDelProyecto(ContextoDeBaseDeDatos contexto)
         {
             ElContextoDeBaseDeDatos = contexto;
 
-        }
-
-        public RepositorioDelProyecto(IRepositorioDelProyecto @object)
-        {
-            this.@object = @object;
         }
 
         public void AgregarCliente(Persona persona)
@@ -243,7 +237,18 @@ namespace Proyecto_Analisis.BL
 
         public List<Factura> ObtenerFacturasVacias()
         {
-            throw new NotImplementedException();
+            List<Factura> todasLasFacturas;
+            List<Factura> facturasVacias;
+            todasLasFacturas = ObtenerTodasLasFacturas();
+            facturasVacias = ObtenerTodasLasFacturas();
+            foreach (var factura in todasLasFacturas)
+            {
+                if (factura.FechaEmision != null)
+                {
+                    facturasVacias.Remove(factura);
+                }
+            }
+            return facturasVacias;
         }
     }
 }

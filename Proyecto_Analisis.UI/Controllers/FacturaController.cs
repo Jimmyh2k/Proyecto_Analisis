@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -120,8 +121,12 @@ namespace Proyecto_Analisis.UI.Controllers
             ViewBag.ID_Factura = ID_Factura;
             Repositorio.FinalizarFactura(ID_Factura);
 
+            EnviarFacturaXML(ID_Factura);
+
             List<Factura> facturasVacias;
             facturasVacias = Repositorio.ObtenerFacturasVacias();
+            ViewBag.Mensaje = "El correo ha sido enviado a exitosamente";
+
             return RedirectToAction("Index", new RouteValueDictionary(new
             {
                 controller = "Factura",
@@ -142,6 +147,66 @@ namespace Proyecto_Analisis.UI.Controllers
             facturaDetallada.MontoTotal = factura.MontoTotal;
             facturaDetallada.Cliente = Cliente;
             return View(facturaDetallada);
+        }
+
+        public void EnviarFacturaXML(int ID_Factura)
+        {
+
+            List<Producto> productos;
+            productos = Repositorio.ObtenerProductosDeFactura(ID_Factura);
+            Persona Cliente = Repositorio.ObtenerClienteDeFactura(ID_Factura);
+            Factura factura = Repositorio.ObtenerFacturaPorID(ID_Factura);
+            FacturaDetallada facturaDetallada = new FacturaDetallada();
+            facturaDetallada.FechaEmision = factura.FechaEmision;
+            facturaDetallada.NombreComercial = factura.NombreComercial;
+            facturaDetallada.ListaDeProductos = productos;
+            facturaDetallada.MontoTotal = factura.MontoTotal;
+            facturaDetallada.Cliente = Cliente;
+
+            String To = Cliente.CorreoElectronico;
+            String Subject = "Factura de compras";
+            String Body = Cliente.PrimerNombre + ", le agradecemos por su compra. Vuelva pronto.";
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.To.Add(To);
+            mailMessage.Subject = Subject;
+            mailMessage.Body = Body;
+            mailMessage.From = new MailAddress(Cliente.CorreoElectronico);
+            mailMessage.IsBodyHtml = false;
+
+            string facturaYClienteInfo =
+    "<?xml version=\"1.0\" encoding=\"utf - 8\" ?>\n" +
+    "< !--Factura.xml stores information about Mahesh Chand and related books -->\n" +
+    "< Facturas >\n" +
+        "\t< Factura Fecha de emision = \"" + factura.FechaEmision + "\" Monto total = \"" + factura.MontoTotal + "\" Comercio = \""
+        + factura.NombreComercial + "\" >\n" +
+            "\t\t< Cliente >" + Cliente.PrimerNombre + " " + Cliente.SegundoNombre + " " + Cliente.PrimerApellido + " " + Cliente.SegundoApellido + " </Cliente>\n";
+            string productosInfo = "";
+            foreach (var producto in productos)
+            {
+                productosInfo =
+            "\t\t< Producto >\n" +
+                "\t\t\t< Nombre > " + producto.Nombre + " </ Nombre >\n" +
+                "\t\t\t< Detalle > " + producto.Detalle + " </ Detalle >\n" +
+                "\t\t\t< Precio unitario > " + producto.PrecioUnitario + " </ Precio unitario >\n" +
+                "\t\t\t< Cantidad > " + producto.Cantidad + " </ Cantidad >\n" +
+            "\t\t</ Producto >\n"
+            + productosInfo;
+
+            }
+            string finalDeLaCadena =
+        "\t</ Factura >\n" +
+     "</ Facturas > \n";
+            String xmlCompleto = facturaYClienteInfo + productosInfo + finalDeLaCadena;
+
+
+            mailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(xmlCompleto, "Factura.xml"));
+
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.Port = 587;
+            smtpClient.UseDefaultCredentials = true;
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new System.Net.NetworkCredential("pruebasdelprograma@gmail.com", "contra segur@ 23");
+            smtpClient.Send(mailMessage);
         }
 
     }
