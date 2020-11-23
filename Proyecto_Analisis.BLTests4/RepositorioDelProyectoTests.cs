@@ -44,7 +44,7 @@ namespace Proyecto_Analisis.BL.Tests
             producto.Cantidad = 10;
         }
 
-        public void inicializarFactura()
+        public void inicializarFacturaLlena()
         {
             factura = new Factura();
             factura.CodigoFactura = 1;
@@ -53,11 +53,32 @@ namespace Proyecto_Analisis.BL.Tests
             factura.NombreComercial = "Pali";
         }
 
-        public void inicializarDetalleFactura()
+        public void inicializarFacturaVacia()
+        {
+            factura = new Factura();
+            factura.CodigoFactura = 1;
+            factura.FechaEmision = null;
+            factura.MontoTotal = 0;
+            factura.NombreComercial = "Pali";
+        }
+
+        public void inicializarDetalleFacturaLlena()
         {
             inicializarPersona();
             inicializarProducto();
-            inicializarFactura();
+            inicializarFacturaLlena();
+            detalleFactura = new DetalleFactura();
+            detalleFactura.ID_DetalleFactura = 1;
+            detalleFactura.ID_Persona = persona.ID;
+            detalleFactura.ID_Producto = producto.ID_Producto;
+            detalleFactura.CodigoFactura = factura.CodigoFactura;
+        }
+
+        public void inicializarDetalleFacturaVacia()
+        {
+            inicializarPersona();
+            inicializarProducto();
+            inicializarFacturaVacia();
             detalleFactura = new DetalleFactura();
             detalleFactura.ID_DetalleFactura = 1;
             detalleFactura.ID_Persona = persona.ID;
@@ -81,7 +102,16 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void FinalizarFacturaTest()
         {
-            throw new NotImplementedException();
+            inicializarFacturaVacia();
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
+            mockRepositorioDelProyecto.Setup(y => y.FinalizarFactura(factura.CodigoFactura));
+            mockRepositorioDelProyecto.Setup(w => w.ObtenerFacturasFinalizadas()).Returns(new List<Factura>() { new Factura() });
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
+
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerFacturasFinalizadas();
+            Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
@@ -122,7 +152,14 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void ObtenerProductosDeFacturaTest()
         {
-            throw new NotImplementedException();
+            inicializarDetalleFacturaLlena();
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            mockRepositorioDelProyecto.Setup(x => x.AgregarDetalleDeFactura(detalleFactura));
+            mockRepositorioDelProyecto.Setup(y => y.ObtenerProductosDeFactura(detalleFactura.CodigoFactura)).Returns(new List<Producto>() { new Producto() });
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerProductosDeFactura(detalleFactura.CodigoFactura);
+            Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
@@ -141,7 +178,6 @@ namespace Proyecto_Analisis.BL.Tests
             RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
             var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerTodosLosClientes();
             Assert.IsTrue(resultadoDelTest.Count() == 1);
-            //Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
@@ -160,7 +196,7 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void AgregarFacturaTest()
         {
-            inicializarFactura();
+            inicializarFacturaLlena();
             var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
             mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
@@ -173,7 +209,7 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void ObtenerFacturaPorIDTest()
         {
-            inicializarFactura();
+            inicializarFacturaLlena();
             var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
 
@@ -189,24 +225,53 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void ObtenerClienteDeFacturaTest()
         {
-            throw new NotImplementedException();
+            inicializarDetalleFacturaLlena();
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            mockRepositorioDelProyecto.Setup(x => x.AgregarDetalleDeFactura(detalleFactura));
+            mockRepositorioDelProyecto.Setup(y => y.ObtenerClienteDeFactura(detalleFactura.CodigoFactura)).Returns(new Persona());
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerClienteDeFactura(detalleFactura.CodigoFactura);
+            Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
         public void ObtenerFacturasVaciasTest()
         {
-            throw new NotImplementedException();
+            inicializarDetalleFacturaVacia();
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
+            mockRepositorioDelProyecto.Setup(y => y.ObtenerFacturasVacias()).Returns(new List<Factura>() { new Factura() });
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerFacturasVacias();
+            Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
         public void ObtenerFacturasFinalizadasTest()
         {
-            throw new NotImplementedException();
+            inicializarFacturaLlena();
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
+            mockRepositorioDelProyecto.Setup(y => y.ObtenerFacturasFinalizadas()).Returns(new List<Factura>() { new Factura() });
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerFacturasFinalizadas();
+            Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
         public void AgregarDetalleDeFacturaTest()
         {
+            inicializarDetalleFacturaLlena ();
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            mockRepositorioDelProyecto.Setup(x => x.AgregarDetalleDeFactura(detalleFactura));
+            mockRepositorioDelProyecto.Setup(y => y.ObtenerProductosDeFactura(detalleFactura.CodigoFactura)).Returns(new List<Producto>() { new Producto() });
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerProductosDeFactura(detalleFactura.CodigoFactura);
+            Assert.IsNotNull(resultadoDelTest);
         }
 
         [TestMethod()]
@@ -231,18 +296,19 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void DecrementarCantidadDeProductoTest()
         {
-            //inicializarProducto();
-            //var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
-            //var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
+            inicializarProducto();
+            Producto productoSegundo = producto;
+            var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
+            var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
 
-            //mockRepositorioDelProyecto.Setup(x => x.AgregarProducto(producto));
-            //mockRepositorioDelProyecto.Setup(y => y.DecrementarCantidadDeProducto(producto.ID_Producto));
-            //mockRepositorioDelProyecto.Setup(w => w.ObtenerProductoPorId(producto.ID_Producto)).Returns(new Producto());
-            //RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockRepositorioDelProyecto.Object);
+            mockRepositorioDelProyecto.Setup(x => x.AgregarProducto(producto));
+            mockRepositorioDelProyecto.Setup(y => y.DecrementarCantidadDeProducto(producto.ID_Producto));
+            mockRepositorioDelProyecto.Setup(w => w.ObtenerProductoPorId(producto.ID_Producto)).Returns(new Producto());
+            RepositorioDelProyecto repositorioDelProyecto = new RepositorioDelProyecto(mockContextoDeLaBaseDeDatos.Object);
 
-            //var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerProductoPorId(producto.ID_Producto);
+            var resultadoDelTest = mockRepositorioDelProyecto.Object.ObtenerProductoPorId(producto.ID_Producto);
 
-            //Assert.IsTrue(producto.Cantidad == 10);
+            Assert.AreNotSame(resultadoDelTest, productoSegundo);
         }
 
         [TestMethod()]
@@ -264,7 +330,7 @@ namespace Proyecto_Analisis.BL.Tests
         [TestMethod()]
         public void ObtenerTodasLasFacturasTest()
         {
-            inicializarFactura();
+            inicializarFacturaLlena();
             var mockContextoDeLaBaseDeDatos = new Mock<ContextoDeBaseDeDatos>();
             var mockRepositorioDelProyecto = new Mock<IRepositorioDelProyecto>();
             mockRepositorioDelProyecto.Setup(x => x.AgregarFactura(factura));
