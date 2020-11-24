@@ -24,6 +24,11 @@ namespace Proyecto_Analisis.UI.Areas.Identity
 
                 services.AddDefaultIdentity<UsuariosDeProgramaDeFacturacion>(options => options.SignIn.RequireConfirmedAccount = false).
                 AddRoles<IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("RequireRoleAdministrativo",
+                         policy => policy.RequireRole("Administrador"));
+                });
             });
         }
         
