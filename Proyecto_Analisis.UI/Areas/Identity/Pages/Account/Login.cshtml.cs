@@ -50,6 +50,7 @@ namespace Proyecto_Analisis.UI.Areas.Identity.Pages.Account
             if (!roleExiste)
             {
                 var result = await _roleManager.CreateAsync(new IdentityRole("Administrador"));
+                
             }
             var roleExiste2 = await _roleManager.RoleExistsAsync("Agente de ventas");
             if (!roleExiste)

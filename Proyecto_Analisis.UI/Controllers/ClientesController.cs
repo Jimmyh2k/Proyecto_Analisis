@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto_Analisis.BL;
@@ -9,6 +10,8 @@ using Proyecto_Analisis.Model;
 
 namespace Proyecto_Analisis.UI.Controllers
 {
+
+    
     public class ClientesController : Controller
     {
 
@@ -30,9 +33,10 @@ namespace Proyecto_Analisis.UI.Controllers
         }
 
         // GET: ClientesController/Details/5
-        
+
 
         // GET: ProductoController/Create
+        [Authorize(Policy = "RequireRoleAdministrativo")]
         public ActionResult Create()
         {
             return View();
@@ -65,6 +69,8 @@ namespace Proyecto_Analisis.UI.Controllers
         }
 
         // GET: PaquetesRecibidos/Edit/5
+        
+        [Authorize(Policy = "RequireRoleAdministrativo")]
         public ActionResult Edit(int Id)
         {
             Persona persona;
@@ -91,6 +97,7 @@ namespace Proyecto_Analisis.UI.Controllers
         }
 
         // GET: ClientesController/Delete/5
+        [Authorize(Policy = "RequireRoleAdministrativo")]
         public ActionResult Delete(int id)
         {
             Persona persona;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto_Analisis.BL;
@@ -35,6 +36,7 @@ namespace Proyecto_Analisis.UI.Controllers
         }
 
         // GET: ProductoController/Create
+        [Authorize(Policy = "RequireRoleAdministrativo")]
         public ActionResult Create()
         {
             return View();
@@ -67,6 +69,7 @@ namespace Proyecto_Analisis.UI.Controllers
         }
 
         // GET: ProductoController/Edit/5
+        [Authorize(Policy = "RequireRoleAdministrativo")]
         public ActionResult Edit(int id)
         {
             ViewBag.id = id;
