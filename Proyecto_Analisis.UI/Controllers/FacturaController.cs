@@ -188,7 +188,6 @@ namespace Proyecto_Analisis.UI.Controllers
                 "\t\t\t< Nombre > " + producto.Nombre + " </ Nombre >\n" +
                 "\t\t\t< Detalle > " + producto.Detalle + " </ Detalle >\n" +
                 "\t\t\t< Precio unitario > " + producto.PrecioUnitario + " </ Precio unitario >\n" +
-                "\t\t\t< Cantidad > " + producto.Cantidad + " </ Cantidad >\n" +
             "\t\t</ Producto >\n"
             + productosInfo;
 
